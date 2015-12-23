@@ -17,11 +17,9 @@ public class LevelData {
             "155555122222133333141000000000000001410000000100000001",
             "155555122222133333141000000000000001410000000100000001",
             "111111111111111111111111111111111111111111111111111111",
-    };static final String[] LEVEL_1 = new String[]{
-            "1"
     };
 
     public static String[][] levels = new String[][]{
-            LEVEL_0, LEVEL_1
+            LEVEL_0
     };
 }
