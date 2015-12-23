@@ -58,17 +58,22 @@ public class Main extends Application {
             for(int j = 0; j < line.length();j++){
                 switch (line.charAt(j)){
                     case '0':
-                        Block floor = new Block(Block.BlockType.ZERO, j * BLOCK_SIZE, i * BLOCK_SIZE);
+                        Block bg0 = new Block(Block.BlockType.ZERO, j * BLOCK_SIZE, i * BLOCK_SIZE);
                         break;
                     case '1':
-                        Block platformFloor = new Block(Block.BlockType.ONE, j * BLOCK_SIZE, i * BLOCK_SIZE);
+                        Block bg1 = new Block(Block.BlockType.ONE, j * BLOCK_SIZE, i * BLOCK_SIZE);
                         break;
                     case '2':
-                        Block brick = new Block(Block.BlockType.TWO,j*BLOCK_SIZE,i*BLOCK_SIZE);
+                        Block bg2 = new Block(Block.BlockType.TWO,j*BLOCK_SIZE,i*BLOCK_SIZE);
                         break;
                     case '3':
-                        Block bonus = new Block(Block.BlockType.THREE,j*BLOCK_SIZE,i*BLOCK_SIZE);
+                        Block bg3 = new Block(Block.BlockType.THREE,j*BLOCK_SIZE,i*BLOCK_SIZE);
                         break;
+                    case '4':
+                        Block bg4 = new Block(Block.BlockType.FOUR,j*BLOCK_SIZE,i*BLOCK_SIZE);
+                        break;
+                    case '5':
+                        Block bg5 = new Block(Block.BlockType.FIVE,j*BLOCK_SIZE,i*BLOCK_SIZE);
                 }
             }
 
@@ -76,7 +81,7 @@ public class Main extends Application {
 
         Interface interfaceGame = new Interface(Interface.AvatarType.ZERO);
         player = new Player(imageView,100,100);
-        Nps nps = new Nps();
+        Nps nps = new Nps("Герион",50,250);
 
 
         player.translateXProperty().addListener((obs,old,newValue)->{
