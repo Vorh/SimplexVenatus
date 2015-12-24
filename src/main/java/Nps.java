@@ -21,11 +21,13 @@ public class Nps extends Pane {
     private Pane paneDialog;
     private TextArea textDialog;
     private Button closeText;
+    private String[] dialogData;
 
-    public Nps(String name, int x, int y){
+    public Nps(String name, int x, int y, String[] dialogData){
         this.name = name;
         this.x = x;
         this.y = y;
+        this.dialogData = dialogData;
 
         createBody();
         createDialog();
@@ -69,9 +71,12 @@ public class Nps extends Pane {
 
 
         textDialog = new TextArea();
-        textDialog.setText("Меня Зовут Клон , я первый нпс созданный создателем \n" +
-                "я очень убогий и кривой , но думаю в будущем стану лучше \n и мой " +
-                "функционал будет более разообразный");
+
+        for (int i = 0; i <dialogData.length ; i++) {
+            textDialog.appendText(dialogData[i]);
+            textDialog.appendText("\n");
+        }
+
         textDialog.setMouseTransparent(true);
         textDialog.setEditable(false);
         textDialog.setPrefSize(400, 100);

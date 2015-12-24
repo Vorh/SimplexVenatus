@@ -17,6 +17,7 @@ public class Main extends Application {
     ImageView imageView = new ImageView("24.png");
 
     Player player;
+    Interface interfaceGame;
 
     final static int BLOCK_SIZE = 32;
     final static int PLAYER_SIZE = 32;
@@ -79,9 +80,9 @@ public class Main extends Application {
 
         }
 
-        Interface interfaceGame = new Interface(Interface.AvatarType.ZERO);
+        interfaceGame = new Interface(Interface.AvatarType.ZERO);
         player = new Player(imageView,100,100);
-        Nps nps = new Nps("Герион",50,250);
+        Nps nps = new Nps("Герион",50,250, DialogData.GERION);
 
 
         player.translateXProperty().addListener((obs,old,newValue)->{
@@ -91,12 +92,8 @@ public class Main extends Application {
             }
         });
 
-
         gameRoot.getChildren().addAll(player);
         appRoot.getChildren().addAll(gameRoot,interfaceRoot);
-
-
-
     }
 
     @Override
