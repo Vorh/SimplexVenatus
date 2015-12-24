@@ -17,6 +17,7 @@ public class Main extends Application {
     ImageView imageView = new ImageView("24.png");
 
     Player player;
+    Shot shot;
     Interface interfaceGame;
 
     final static int BLOCK_SIZE = 32;
@@ -28,24 +29,43 @@ public class Main extends Application {
 
     int levelNumber = 0;
     private int levelWidth;
+    static boolean flagShot = true;
 
     public void update(){
         if(isPressed(KeyCode.UP)){
             player.animation.play();
             player.animation.setOffsetY(96);
+            if (flagShot == true) {
+                Shot.setDirection(Shot.Direction.UP);
+            }
             player.moveY(-2);
         }else if(isPressed((KeyCode.DOWN))){
             player.animation.play();
             player.animation.setOffsetY(0);
+            if (flagShot == true) {
+                Shot.setDirection(Shot.Direction.DOWN);
+            }
             player.moveY(2);
         }else if(isPressed(KeyCode.RIGHT)){
             player.animation.play();
             player.animation.setOffsetY(64);
+            if (flagShot == true) {
+                Shot.setDirection(Shot.Direction.RIGHT);
+            }
             player.moveX(2);
-        }else if(isPressed(KeyCode.LEFT)){
+        }else if(isPressed(KeyCode.LEFT)) {
             player.animation.play();
             player.animation.setOffsetY(32);
+            if (flagShot == true) {
+                Shot.setDirection(Shot.Direction.LEFT);
+            }
             player.moveX(-2);
+        }else if(isPressed(KeyCode.SPACE)){
+            if(flagShot == true) {
+                flagShot = false;
+                shot = new Shot();
+                shot.shot(player.getTranslateX(),player.getTranslateY());
+                }
         }else {
             player.animation.stop();
         }
@@ -83,7 +103,7 @@ public class Main extends Application {
         interfaceGame = new Interface(Interface.AvatarType.ZERO);
         player = new Player(imageView,100,100);
         Nps nps = new Nps("Герион",50,250, DialogData.GERION);
-
+//        shot = new Shot();
 
         player.translateXProperty().addListener((obs,old,newValue)->{
             int offset = newValue.intValue();
