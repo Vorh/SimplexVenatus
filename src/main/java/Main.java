@@ -27,6 +27,7 @@ public class Main extends Application {
     public static Pane gameRoot = new Pane();
     public static Pane interfaceRoot = new Pane();
 
+
     int levelNumber = 0;
     private int levelWidth;
     static boolean flagShot = true;
@@ -73,6 +74,30 @@ public class Main extends Application {
 
     public void initContent(){
 
+        buildLVL();
+
+
+        interfaceGame = new Interface(Interface.AvatarType.ZERO);
+        player = new Player(imageView,100,100);
+        Nps nps1 = new Nps("Враганус", 290, 411, DialogData.CLON, new ImageView("23.png"), new ImageView("ava.png"));
+        Nps nps2 = new Nps("Бурака", 290, 101, DialogData.CLON, new ImageView("23.png"), new ImageView("ava.png"));
+        Nps nps0 = new Nps("Герион",50,250, DialogData.GERION, new ImageView("24.png"), new ImageView("ava.png"));
+//        Nps nps2 = new Nps("Третий", 150, 250, DialogData.GERION, new ImageView("24.png"), new ImageView("ava.png"));
+//        Nps nps4 = new Nps("Третий", 380, 250, DialogData.GERION, new ImageView("24.png"), new ImageView("ava.png"));
+//        shot = new Shot();
+
+        player.translateXProperty().addListener((obs,old,newValue)->{
+            int offset = newValue.intValue();
+            if(offset>300 && offset<levelWidth-300){
+                gameRoot.setLayoutX(-(offset-300));
+            }
+        });
+
+        gameRoot.getChildren().addAll(player);
+        appRoot.getChildren().addAll(gameRoot,interfaceRoot);
+    }
+
+    private void buildLVL() {
         levelWidth = LevelData.levels[levelNumber][0].length()*BLOCK_SIZE;
         for(int i = 0; i < LevelData.levels[levelNumber].length; i++){
             String line = LevelData.levels[levelNumber][i];
@@ -95,31 +120,18 @@ public class Main extends Application {
                         break;
                     case '5':
                         Block bg5 = new Block(Block.BlockType.FIVE,j*BLOCK_SIZE,i*BLOCK_SIZE);
+                        break;
                 }
             }
 
         }
-
-        interfaceGame = new Interface(Interface.AvatarType.ZERO);
-        player = new Player(imageView,100,100);
-        Nps nps = new Nps("Герион",50,250, DialogData.GERION);
-//        shot = new Shot();
-
-        player.translateXProperty().addListener((obs,old,newValue)->{
-            int offset = newValue.intValue();
-            if(offset>300 && offset<levelWidth-300){
-                gameRoot.setLayoutX(-(offset-300));
-            }
-        });
-
-        gameRoot.getChildren().addAll(player);
-        appRoot.getChildren().addAll(gameRoot,interfaceRoot);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         initContent();
-        Scene scene = new Scene(appRoot, 600,543);
+
+        Scene scene = new Scene(appRoot, 617,533);
 
         scene.setOnKeyPressed(event -> {
             keys.put(event.getCode(), true);
@@ -139,6 +151,7 @@ public class Main extends Application {
         timer.start();
         primaryStage.setTitle("Tanks");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

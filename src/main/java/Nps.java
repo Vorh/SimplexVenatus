@@ -12,34 +12,46 @@ import javafx.scene.text.Text;
 public class Nps extends Pane {
 
     private Label iconBody;
-    private ImageView imageBody = new ImageView("24.png");
-    private ImageView imageAvatar = new ImageView("ava.png");
+    private ImageView imageBody;
+    private ImageView imageAvatar;
     private String name;
     private int x;
     private int y;
+
     private Text nameBody;
     private Pane paneDialog;
     private TextArea textDialog;
+    private int pageDialog = 0;
     private Button closeText;
+    private Button takeQuest;
+    private Button listenTest;
+    private Button attack;
+    private Button backText;
+
     private String[] dialogData;
 
-    public Nps(String name, int x, int y, String[] dialogData){
+    public Nps(String name, int x, int y, String[] dialogData, ImageView imageBody, ImageView imageAvatar){
         this.name = name;
         this.x = x;
         this.y = y;
         this.dialogData = dialogData;
-
+        this.imageBody = imageBody;
+        this.imageAvatar = imageAvatar;
         createBody();
         createDialog();
         createName();
 
 
-        paneDialog.getChildren().addAll(textDialog,closeText,imageAvatar);
+
+        paneDialog.getChildren().addAll(textDialog, imageAvatar, listenTest,takeQuest,closeText,attack,backText);
         Main.interfaceRoot.getChildren().addAll(paneDialog);
-        getChildren().addAll(iconBody,nameBody);
+
+        this.getChildren().addAll(iconBody,nameBody);
         Main.gameRoot.getChildren().add(this);
 
     }
+
+
 
     private void createBody(){
         iconBody = new Label();
@@ -65,26 +77,44 @@ public class Nps extends Pane {
     private void createDialog(){
         paneDialog = new Pane();
         paneDialog.setTranslateX(0);
-        paneDialog.setTranslateY(440);
+        paneDialog.setTranslateY(433);
         paneDialog.setVisible(false);
         paneDialog.setDisable(true);
 
 
         textDialog = new TextArea();
 
-        for (int i = 0; i <dialogData.length ; i++) {
-            textDialog.appendText(dialogData[i]);
-            textDialog.appendText("\n");
-        }
+        textDialog.setText(dialogData[pageDialog]);
 
         textDialog.setMouseTransparent(true);
         textDialog.setEditable(false);
         textDialog.setPrefSize(400, 100);
         textDialog.setTranslateX(100);
         textDialog.setFont(Font.font("Arial",FontWeight.BOLD,12));
+        textDialog.setWrapText(true);
 
-        closeText = new Button("X");
+        listenTest = new Button("Дальше");
+        listenTest.setTranslateX(565);
+        listenTest.setPrefSize(65,20);
+
+        backText = new Button("Назад");
+        backText.setTranslateX(500);
+        backText.setPrefSize(65,20);
+
+        closeText = new Button("Прекратить диалог");
         closeText.setTranslateX(500);
+        closeText.setTranslateY(25);
+        closeText.setPrefSize(130,20);
+
+        takeQuest = new Button("Взять задание");
+        takeQuest.setTranslateX(500);
+        takeQuest.setTranslateY(50);
+        takeQuest.setPrefSize(130,20);
+
+        attack = new Button("Атаковать");
+        attack.setTranslateX(500);
+        attack.setTranslateY(75);
+        attack.setPrefSize(130,20);
 
 
         closeText.setOnMouseClicked(event1 -> {
@@ -92,14 +122,33 @@ public class Nps extends Pane {
             paneDialog.setDisable(true);
         });
 
-        imageAvatar.setViewport(new Rectangle2D(96, 0, 96, 96));
+        listenTest.setOnMouseClicked(event -> {
+            try {
+                pageDialog++;
+                textDialog.setText(dialogData[pageDialog]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+               pageDialog--;
+            }
+        });
+
+        backText.setOnMouseClicked(event -> {
+            try {
+                pageDialog--;
+                textDialog.setText(dialogData[pageDialog]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                pageDialog++;
+            }
+        });
+
+        imageAvatar.setViewport(new Rectangle2D(0, 0, 96, 96));
+
     }
 
     private void createName(){
         nameBody = new Text();
         nameBody.setText(name);
         nameBody.setVisible(false);
-        nameBody.setFont(Font.font("Arial", FontWeight.LIGHT, 14));
+        nameBody.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         nameBody.setFill(Color.BLACK);
         nameBody.setTranslateX(x - 10);
         nameBody.setTranslateY(y - 5);
