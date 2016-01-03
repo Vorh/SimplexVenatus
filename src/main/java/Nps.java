@@ -28,6 +28,8 @@ public class Nps extends Pane {
     private Button attack;
     private Button backText;
 
+    private Fight fight;
+
     private String[] dialogData;
 
     public Nps(String name, int x, int y, String[] dialogData, ImageView imageBody, ImageView imageAvatar){
@@ -37,6 +39,7 @@ public class Nps extends Pane {
         this.dialogData = dialogData;
         this.imageBody = imageBody;
         this.imageAvatar = imageAvatar;
+        this.fight = fight;
         createBody();
         createDialog();
         createName();
@@ -81,6 +84,7 @@ public class Nps extends Pane {
         paneDialog.setVisible(false);
         paneDialog.setDisable(true);
 
+        imageAvatar.setViewport(new Rectangle2D(0, 0, 96, 96));
 
         textDialog = new TextArea();
 
@@ -90,31 +94,31 @@ public class Nps extends Pane {
         textDialog.setEditable(false);
         textDialog.setPrefSize(400, 100);
         textDialog.setTranslateX(100);
-        textDialog.setFont(Font.font("Arial",FontWeight.BOLD,12));
+        textDialog.setFont(Font.font("Arial", FontWeight.BOLD, 12));
         textDialog.setWrapText(true);
 
         listenTest = new Button("Дальше");
         listenTest.setTranslateX(565);
-        listenTest.setPrefSize(65,20);
+        listenTest.setPrefSize(65, 20);
 
         backText = new Button("Назад");
         backText.setTranslateX(500);
-        backText.setPrefSize(65,20);
+        backText.setPrefSize(65, 20);
 
         closeText = new Button("Прекратить диалог");
         closeText.setTranslateX(500);
         closeText.setTranslateY(25);
-        closeText.setPrefSize(130,20);
+        closeText.setPrefSize(130, 20);
 
         takeQuest = new Button("Взять задание");
         takeQuest.setTranslateX(500);
         takeQuest.setTranslateY(50);
-        takeQuest.setPrefSize(130,20);
+        takeQuest.setPrefSize(130, 20);
 
         attack = new Button("Атаковать");
         attack.setTranslateX(500);
         attack.setTranslateY(75);
-        attack.setPrefSize(130,20);
+        attack.setPrefSize(130, 20);
 
 
         closeText.setOnMouseClicked(event1 -> {
@@ -127,7 +131,7 @@ public class Nps extends Pane {
                 pageDialog++;
                 textDialog.setText(dialogData[pageDialog]);
             } catch (ArrayIndexOutOfBoundsException e) {
-               pageDialog--;
+                pageDialog--;
             }
         });
 
@@ -140,7 +144,14 @@ public class Nps extends Pane {
             }
         });
 
-        imageAvatar.setViewport(new Rectangle2D(0, 0, 96, 96));
+        attack.setOnMouseClicked(event -> {
+            Fight fight = new Fight();
+
+            Main.interfaceRoot.setVisible(false);
+
+            paneDialog.setVisible(false);
+            paneDialog.setDisable(true);
+        });
 
     }
 

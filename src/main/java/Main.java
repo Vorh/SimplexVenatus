@@ -17,7 +17,6 @@ public class Main extends Application {
     ImageView imageView = new ImageView("24.png");
 
     Player player;
-    Shot shot;
     Interface interfaceGame;
 
     final static int BLOCK_SIZE = 32;
@@ -26,6 +25,7 @@ public class Main extends Application {
     public static Pane appRoot = new Pane();
     public static Pane gameRoot = new Pane();
     public static Pane interfaceRoot = new Pane();
+    public static Pane fightRoot = new Pane();
 
 
     int levelNumber = 0;
@@ -36,37 +36,23 @@ public class Main extends Application {
         if(isPressed(KeyCode.UP)){
             player.animation.play();
             player.animation.setOffsetY(96);
-            if (flagShot == true) {
-                Shot.setDirection(Shot.Direction.UP);
-            }
+
             player.moveY(-2);
         }else if(isPressed((KeyCode.DOWN))){
             player.animation.play();
             player.animation.setOffsetY(0);
-            if (flagShot == true) {
-                Shot.setDirection(Shot.Direction.DOWN);
-            }
+
             player.moveY(2);
         }else if(isPressed(KeyCode.RIGHT)){
             player.animation.play();
             player.animation.setOffsetY(64);
-            if (flagShot == true) {
-                Shot.setDirection(Shot.Direction.RIGHT);
-            }
+
             player.moveX(2);
         }else if(isPressed(KeyCode.LEFT)) {
             player.animation.play();
             player.animation.setOffsetY(32);
-            if (flagShot == true) {
-                Shot.setDirection(Shot.Direction.LEFT);
-            }
+
             player.moveX(-2);
-        }else if(isPressed(KeyCode.SPACE)){
-            if(flagShot == true) {
-                flagShot = false;
-                shot = new Shot();
-                shot.shot(player.getTranslateX(),player.getTranslateY());
-                }
         }else {
             player.animation.stop();
         }
@@ -82,9 +68,6 @@ public class Main extends Application {
         Nps nps1 = new Nps("Враганус", 290, 411, DialogData.CLON, new ImageView("23.png"), new ImageView("ava.png"));
         Nps nps2 = new Nps("Бурака", 290, 101, DialogData.CLON, new ImageView("23.png"), new ImageView("ava.png"));
         Nps nps0 = new Nps("Герион",50,250, DialogData.GERION, new ImageView("24.png"), new ImageView("ava.png"));
-//        Nps nps2 = new Nps("Третий", 150, 250, DialogData.GERION, new ImageView("24.png"), new ImageView("ava.png"));
-//        Nps nps4 = new Nps("Третий", 380, 250, DialogData.GERION, new ImageView("24.png"), new ImageView("ava.png"));
-//        shot = new Shot();
 
         player.translateXProperty().addListener((obs,old,newValue)->{
             int offset = newValue.intValue();
@@ -94,7 +77,7 @@ public class Main extends Application {
         });
 
         gameRoot.getChildren().addAll(player);
-        appRoot.getChildren().addAll(gameRoot,interfaceRoot);
+        appRoot.getChildren().addAll(gameRoot,interfaceRoot,fightRoot);
     }
 
     private void buildLVL() {
