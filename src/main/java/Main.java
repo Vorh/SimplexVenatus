@@ -14,7 +14,7 @@ public class Main extends Application {
     public static ArrayList<Block> platforms = new ArrayList<>();
     public static ArrayList<Nps> nps = new ArrayList<>();
 
-    ImageView imageView = new ImageView("24.png");
+    ImageView imageView = new ImageView("animation/gg.png");
 
     Player player;
     Interface interfaceGame;
@@ -65,14 +65,14 @@ public class Main extends Application {
 
         interfaceGame = new Interface(Interface.AvatarType.ZERO);
         player = new Player(imageView,100,100);
-        Nps nps1 = new Nps("Враганус", 290, 411, DialogData.CLON, new ImageView("23.png"), new ImageView("ava.png"));
-        Nps nps2 = new Nps("Бурака", 290, 101, DialogData.CLON, new ImageView("23.png"), new ImageView("ava.png"));
-        Nps nps0 = new Nps("Герион",50,250, DialogData.GERION, new ImageView("24.png"), new ImageView("ava.png"));
+        Nps nps1 = new Nps("Враганус", 290, 411, DialogData.CLON, new ImageView("animation/23.png"), new ImageView("avatars/ava.png"));
+        Nps nps2 = new Nps("Бурака", 290, 101, DialogData.CLON, new ImageView("animation/23.png"), new ImageView("avatars/ava.png"));
+        Nps nps0 = new Nps("Герион",50,250, DialogData.GERION, new ImageView("animation/gg.png"), new ImageView("avatars/ava.png"));
 
         player.translateXProperty().addListener((obs,old,newValue)->{
             int offset = newValue.intValue();
-            if(offset>300 && offset<levelWidth-300){
-                gameRoot.setLayoutX(-(offset-300));
+            if(offset>455 && offset<levelWidth-455){
+                gameRoot.setLayoutX(-(offset-455));
             }
         });
 
@@ -114,7 +114,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         initContent();
 
-        Scene scene = new Scene(appRoot, 617,533);
+        Scene scene = new Scene(appRoot, 900,600);
 
         scene.setOnKeyPressed(event -> {
             keys.put(event.getCode(), true);

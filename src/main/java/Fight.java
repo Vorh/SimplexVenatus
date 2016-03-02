@@ -9,9 +9,9 @@ public class Fight extends Pane{
     Pane statePaneEnemy;
     Pane icon;
 
-    ImageView iconAvatar = new ImageView("ava.png");
-    ImageView iconEnemy = new ImageView("ava.png");
-    ImageView iconBodyEnemy = new ImageView("ava.png");
+    ImageView iconAvatar = new ImageView("avatars/ava.png");
+    ImageView iconEnemy = new ImageView("avatars/ava.png");
+    ImageView iconBodyEnemy = new ImageView("avatars/ava.png");
 
 
     TextArea logFight;

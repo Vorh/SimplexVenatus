@@ -9,7 +9,7 @@ import javafx.scene.text.FontWeight;
 
 public class Interface extends Pane {
 
-    private ImageView iconAvatar = new ImageView("ava.png");
+    private ImageView iconAvatar = new ImageView("avatars/ava.png");
     private static Label namePlayer;
     private static Label lvlPlayer;
     private static Label hpBar;

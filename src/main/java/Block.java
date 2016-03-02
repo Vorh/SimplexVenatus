@@ -4,12 +4,12 @@ import javafx.scene.layout.Pane;
 
 public class Block extends Pane{
 
-    ImageView bg0 = new ImageView("0.png");
-    ImageView bg1 = new ImageView("1.png");
-    ImageView bg2 = new ImageView("2.png");
-    ImageView bg3 = new ImageView("3.png");
-    ImageView bg4 = new ImageView("4.png");
-    ImageView bg5 = new ImageView("5.png");
+    ImageView bg0 = new ImageView("block/0.png");
+    ImageView bg1 = new ImageView("block/1.png");
+    ImageView bg2 = new ImageView("block/2.png");
+    ImageView bg3 = new ImageView("block/3.png");
+    ImageView bg4 = new ImageView("block/4.png");
+    ImageView bg5 = new ImageView("block/5.png");
 
     public enum BlockType{
         ZERO,ONE,TWO,THREE,FOUR,FIVE
